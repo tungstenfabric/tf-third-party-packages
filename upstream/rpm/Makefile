@@ -50,9 +50,14 @@ $(SPEC_TARGETS): prep
 		mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/$@/ --spec specs/$@/$@.spec --resultdir=$(BUILD_BASE)/SRPMS ;\
 		echo "contrail-third-party-packages: About to make $@ rpm" ; \
 		mock -r $(MOCK_CONFIG) $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm --resultdir $(BUILD_BASE)/RPMS ;\
-		echo "contrail-third-party-packages: About to clean up src.rpm" ; \
-		rm $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm ; \
-		rm $(BUILD_BASE)/RPMS/$(PKG_NAME).src.rpm ; \
+                echo "dbg: contrail-third-party-packages: ls $(BUILD_BASE)/SRPMS/" ; \
+                ls $(BUILD_BASE)/SRPMS/ || true ; \
+		echo "contrail-third-party-packages: About to clean up $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm" ; \
+		rm $(BUILD_BASE)/SRPMS/$(PKG_NAME).src.rpm || true ; \
+                echo "dbg: contrail-third-party-packages: ls $(BUILD_BASE)/RPMS/" ; \
+                ls  $(BUILD_BASE)/RPMS/ || true ; \
+                echo "contrail-third-party-packages: About to clean up $(BUILD_BASE)/RPMS/$(PKG_NAME).src.rpm" ; \
+		rm $(BUILD_BASE)/RPMS/$(PKG_NAME).src.rpm || true ; \
 	else \
 		echo "docker env: contrail-third-party-packages: make $@" ; \
 		yum-builddep -q -y specs/$@/$@.spec ; \
