@@ -5,6 +5,3 @@ Please refer to the wiki for additional details.
 
 rpm based packages are described at
 https://github.com/Juniper/contrail-third-party-packages/wiki/Third-party-packages-in-centos
-
-debian based packages are described at
-https://github.com/Juniper/contrail-third-party-packages/wiki/Third-party-packages-in-debian
