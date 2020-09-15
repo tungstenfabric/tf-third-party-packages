@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "227be09e_436589a8",
+        "filename": "upstream/rpm/specs/librdkafka-1.5.0/librdkafka-1.5.0.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 382
+      },
+      "writtenOn": "2020-09-15T07:33:10Z",
+      "side": 1,
+      "message": "error: URL https://github.com/edenhill/librdkafka/archive/1.5.0.zip returns 404 - not found",
+      "revId": "bc77f384778a1b5482710b3b87b6fd05304362ff",
+      "serverId": "c72cd27d-1743-4a55-84a4-cd13b8400c52",
+      "unresolved": true
+    }
+  ]
+}
