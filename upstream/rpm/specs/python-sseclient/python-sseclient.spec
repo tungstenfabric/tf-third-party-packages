@@ -1,7 +1,7 @@
 %define srcname sseclient
-%define version 0.0.11
-%define unmangled_version 0.0.11
-%define unmangled_version 0.0.11
+%define version 0.0.26
+%define unmangled_version 0.0.26
+%define unmangled_version 0.0.26
 %define release 0contrail0
 
 Summary: Python client library for reading Server Sent Event streams.
