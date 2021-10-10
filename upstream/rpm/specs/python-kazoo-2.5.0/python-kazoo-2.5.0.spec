@@ -9,12 +9,12 @@ Url:      https://pypi.python.org/pypi/kazoo/
 Source0:   https://pypi.python.org/packages/source/k/%{srcname}/%{srcname}-%{version}.tar.gz
 BuildArch: noarch
 
-BuildRequires:  python-devel
-BuildRequires:  python-setuptools
+BuildRequires:  python2-devel
+BuildRequires:  python2-setuptools
 BuildRequires:  unzip
 
-Requires:       python-six
-Requires:       python-eventlet >= 0.17.1
+Requires:       python2-six
+Requires:       python2-eventlet >= 0.17.1
 
 %description
 Implements a higher level API to Apache Zookeeper for Python clients.

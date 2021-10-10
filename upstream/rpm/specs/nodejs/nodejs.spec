@@ -22,7 +22,6 @@ BuildRequires: openssl-devel
 BuildRequires: libstdc++-devel
 BuildRequires: zlib-devel
 BuildRequires: gzip
-BuildRequires: python
 
 %description
 Node.js is a server-side JavaScript environment that uses an asynchronous event-driven model.
