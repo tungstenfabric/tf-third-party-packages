@@ -12,7 +12,7 @@ Patch0: ez_setup.py.patch
 BuildArch: noarch
 
 Requires: python-thrift
-Requires: python-setuptools
+Requires: python2-setuptools
 
 #Requires:           contrail-analytics-venv
 #Requires:           contrail-api-venv

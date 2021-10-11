@@ -18,7 +18,7 @@ and matching them against a list of media-ranges.
 %package -n python2-%{srcname}
 Summary:        %{summary}
 BuildRequires:  python2-devel
-BuildRequires:  python%{?fedora:2}-setuptools
+BuildRequires:  python2-setuptools
 %{?python_provide:%python_provide python2-%{srcname}}
 
 

@@ -18,11 +18,13 @@ BuildRequires: tar
 BuildRequires: gcc
 BuildRequires: gcc-c++
 BuildRequires: make
-BuildRequires: openssl-devel
+BuildRequires: openssl-devel <= 1:1.0.2o
 BuildRequires: libstdc++-devel
 BuildRequires: zlib-devel
 BuildRequires: gzip
-BuildRequires: python
+
+# to disable /usr/bin/python requirement
+AutoReqProv: no
 
 %description
 Node.js is a server-side JavaScript environment that uses an asynchronous event-driven model.

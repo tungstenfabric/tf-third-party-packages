@@ -30,8 +30,12 @@ Summary: Easy, clean, reliable Python 2/3 compatibility
 %{?python_provide:%python_provide python2-%{name}}
 BuildRequires: python2-devel
 BuildRequires: python2-setuptools
+%if 0%{?rhel} < 8
 BuildRequires: numpy
-BuildRequires: python-requests
+%else
+BuildRequires: python2-numpy
+%endif
+BuildRequires: python2-requests
 BuildRequires: python2-pytest
 Provides:      future = 0:%{version}-%{release}
 %description -n python2-%{name}
@@ -82,7 +86,7 @@ popd
 ##It's for testing purpose, i guess. Ignore them.
 %check
 pushd python2
-PYTHONPATH=$PWD/build/lib py.test -v
+PYTHON_DISALLOW_AMBIGUOUS_VERSION=0 PYTHONPATH=$PWD/build/lib py.test -v
 popd
 
 %files -n python2-%{name}

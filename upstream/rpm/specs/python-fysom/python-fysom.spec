@@ -9,8 +9,8 @@ Url:      https://pypi.org/project/%{srcname}/
 Source0:  https://pypi.python.org/packages/source/f/%{srcname}/%{srcname}-%{version}.tar.gz
 BuildArch: noarch
 
-BuildRequires:  python-devel
-BuildRequires:  python-setuptools
+BuildRequires:  python2-devel
+BuildRequires:  python2-setuptools
 
 %description
 Python Finite State Machine

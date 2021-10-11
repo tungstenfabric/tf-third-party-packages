@@ -11,7 +11,7 @@ License: BSD-2-Clause
 URL:     https://github.com/edenhill/librdkafka
 Source: https://github.com/edenhill/%{name}/archive/%{version}.zip
 
-BuildRequires: zlib-devel libstdc++-devel gcc >= 4.1 gcc-c++ openssl-devel cyrus-sasl-devel
+BuildRequires: zlib-devel libstdc++-devel gcc >= 4.1 gcc-c++ openssl-devel <= 1:1.0.2o cyrus-sasl-devel
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 %description
@@ -21,7 +21,7 @@ librdkafka is the C/C++ client library implementation of the Apache Kafka protoc
 %package -n %{name}%{soname}
 Summary: The Apache Kafka C library
 Group:   Development/Libraries/C and C++
-Requires: zlib libstdc++ openssl-libs cyrus-sasl
+Requires: zlib libstdc++ openssl-libs <= 1:1.0.2o cyrus-sasl
 %description -n %{name}%{soname}
 librdkafka is the C/C++ client library implementation of the Apache Kafka protocol, containing both Producer and Consumer support.
 

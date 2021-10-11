@@ -1,0 +1,10 @@
+--- src/ssl/ring_buffer_bio.hpp    2017-05-16 16:27:14.000000000 -0400
++++ src/ssl/ring_buffer_bio.hpp    2021-10-12 16:58:37.371337602 -0400
+@@ -45,6 +45,7 @@
+ #include "ring_buffer.hpp"
+ 
+ #include <assert.h>
++#include <openssl/ossl_typ.h>
+ #include <openssl/bio.h>
+ 
+ namespace cass {

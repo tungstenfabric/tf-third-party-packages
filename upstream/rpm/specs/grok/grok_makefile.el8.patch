@@ -1,0 +1,11 @@
+--- Makefile        2021-10-14 07:46:05.172047988 -0400
++++ Makefile        2021-10-14 07:46:27.517362390 -0400
+@@ -213,7 +213,7 @@
+	rpcgen -h $< -o $@
+ 
+ %.c: %.gperf
+-	@if $(GPERF) --version | head -1 | egrep -v '3\.[0-9]+\.[0-9]+' ; then \
++	@if $(GPERF) --version | head -1 | egrep -v '3\.[0-9]+' ; then \
+		echo "We require gperf version >= 3.0.3" ; \
+		exit 1; \
+	fi

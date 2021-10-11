@@ -26,7 +26,7 @@ Source0:       https://github.com/%{gh_owner}/%{gh_project}/archive/%{gh_commit}
 
 BuildRequires: cmake >= 2.6.4
 BuildRequires: libuv-devel
-BuildRequires: openssl-devel
+BuildRequires: openssl-devel <= 1:1.0.2o
 
 
 %description

@@ -14,7 +14,19 @@ SPEC_DIR     := $(RPM_DIR)/specs
 SPEC_TARGETS := $(notdir $(wildcard $(SPEC_DIR)/*))
 UTILS_DIR    := $(RPM_DIR)/utils
 
-PKG_NAME = $(shell rpmspec --query --queryformat='%{name}-%{version}-%{release}\n' $(SPEC_DIR)/$@/$@.spec | head -n1)
+OS_DISTR      ?= $(shell cat /etc/os-release | grep '^ID=' | cut -d = -f 2 | sed  's/\"//g')
+OS_DISTR_VER  ?= $(shell cat /etc/os-release | grep '^VERSION_ID' | cut -d = -f 2 | sed  's/\"//g')
+
+RPMBUILD_FLAGS ?=
+ifeq ($(OS_DISTR), rhel)
+	ifeq ($(OS_DISTR_VER), 8.4)
+		RPMBUILD_FLAGS += --define "__python %__python2"
+		RPMBUILD_FLAGS += --define "__brp_mangle_shebangs %{nil}"
+		RPMBUILD_FLAGS += --define "debug_package %{nil}"
+	endif
+endif
+
+CONTAINER_ENV := $(shell if cat /proc/self/cgroup | grep -q 'docker\|libpod' ; then echo 1 ; else echo 0 ; fi)
 
 all: $(SPEC_TARGETS)
 
@@ -42,10 +54,14 @@ clean: clean_srpms clean_rpms
 touch_all:
 	find . -exec touch {} +
 
+ifeq ($(CONTAINER_ENV), 0)
+	PKG_NAME = $(shell rpmspec --query --queryformat='%{name}-%{version}-%{release}\n' $(SPEC_DIR)/$@/$@.spec | head -n1)
+endif
+
 $(SPEC_TARGETS): prep
 	@echo "contrail-third-party-packages: prepare sources for $@"
-	spectool -g -R $(SPEC_DIR)/$@/$@.spec -C $(SPEC_DIR)/$@/
-	@if ! cat /proc/self/cgroup | grep -q docker ; then \
+	spectool -g -R $(RPMBUILD_FLAGS) $(SPEC_DIR)/$@/$@.spec -C $(SPEC_DIR)/$@/
+	@if [[ $(CONTAINER_ENV) == 0 ]] ; then \
 		echo "contrail-third-party-packages: About to make $@ src.rpm" ; \
 		mock -r $(MOCK_CONFIG) --buildsrpm --sources specs/$@/ --spec specs/$@/$@.spec --resultdir=$(BUILD_BASE)/SRPMS ;\
 		echo "contrail-third-party-packages: About to make $@ rpm" ; \
@@ -55,8 +71,8 @@ $(SPEC_TARGETS): prep
 		rm $(BUILD_BASE)/RPMS/$(PKG_NAME).src.rpm ; \
 	else \
 		echo "docker env: contrail-third-party-packages: make $@" ; \
-		yum-builddep -q -y specs/$@/$@.spec ; \
-		rpmbuild -bb \
+		yum-builddep -y $(RPMBUILD_FLAGS) specs/$@/$@.spec ; \
+		rpmbuild -bb $(RPMBUILD_FLAGS) \
 			--define "_buildrootdir $$(mktemp -d)" \
 			--define "_topdir $(BUILD_BASE)" \
 			--define "_sourcedir $(SPEC_DIR)/$@" \

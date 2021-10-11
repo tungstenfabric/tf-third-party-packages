@@ -23,18 +23,24 @@ Group:         System Environment/Libraries
 
 URL:           http://datastax.github.io/cpp-driver/
 Source0:       https://github.com/%{gh_owner}/%{gh_project}/archive/%{version}.tar.gz
+%if 0%{?rhel} >= 8
+Patch0: ring_buffer_bio.hpp.el8.patch
+%endif
 
 BuildRequires: cmake >= 2.6.4
 BuildRequires: libuv-devel
-BuildRequires: openssl-devel
+BuildRequires: openssl-devel <= 1:1.0.2o
 
+%if 0%{?rhel} >= 8
+%define CXXFLAGS -Wno-implicit-fallthrough -Wno-error=maybe-uninitialized -Wno-error=class-memaccess -Wno-error=unused-function  -Wno-error=deprecated-declarations -Wno-error=implicit-function-declaration
+%endif
 
 %description
 %{summary}.
 
 A modern, feature-rich, and highly tunable C/C++ client library for
 Apache Cassandra (1.2+) and DataStax Enterprise (3.1+) using exclusively
-Cassandra's native protocol and Cassandra Query Language v3.
+Cassandra s native protocol and Cassandra Query Language v3.
 
 
 %package devel
@@ -49,20 +55,21 @@ for %{name}.
 
 %prep
 %setup -q -n %{gh_project}-%{version}
-
+%if 0%{?rhel} >= 8
+%patch0 -p0
+%endif
 find examples -name .gitignore -exec rm {} \; -print
 
 
 %build
-%if 0%{?fedora} >= 26
-export CXXFLAGS="$RPM_OPT_FLAGS -Wno-implicit-fallthrough"
-%endif
+export CXXFLAGS="%{?CXXFLAGS} $RPM_OPT_FLAGS"
 %cmake
 
 make %{_smp_mflags}
 
 
 %install
+export CXXFLAGS="%{?CXXFLAGS} $RPM_OPT_FLAGS"
 make install DESTDIR="%{buildroot}"
 
 rm %{buildroot}%{_libdir}/%{libname}_static.a

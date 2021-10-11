@@ -12,7 +12,14 @@ URL:     https://github.com/edenhill/librdkafka
 Source:	 https://github.com/edenhill/%{name}/archive/v%{version}.tar.gz
 
 BuildRequires: zlib-devel libstdc++-devel gcc >= 4.1 gcc-c++ cyrus-sasl-devel
+%if 0%{?rhel} >= 8
+BuildRequires: libzstd-devel
+%endif 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+
+%if 0%{?rhel} >= 8
+%define CXXFLAGS  -Wno-error=implicit-function-declaration -Wno-implicit-function-declaration
+%endif
 
 %define _source_payload w9.gzdio
 %define _binary_payload w9.gzdio
@@ -24,8 +31,8 @@ librdkafka is the C/C++ client library implementation of the Apache Kafka protoc
 %package -n %{name}%{soname}
 Summary: The Apache Kafka C library
 Group:   Development/Libraries/C and C++
-Requires: zlib libstdc++ cyrus-sasl openssl-libs >= 1.0.2
-BuildRequires: openssl-devel >= 1.0.2 python3
+Requires: zlib libstdc++ cyrus-sasl openssl-libs <= 1.0.2o
+BuildRequires: openssl-devel <= 1:1.0.2o python3
 
 %description -n %{name}%{soname}
 librdkafka is the C/C++ client library implementation of the Apache Kafka protocol, containing both Producer and Consumer support.
@@ -48,7 +55,7 @@ using librdkafka.
 
 # --install-deps will install missing dependencies that are not available
 # through BuildRequires, such as libzstd, which will be linked statically.
-%configure --install-deps --disable-lz4-ext
+%configure --install-deps --disable-lz4-ext --CXXFLAGS="%{?CXXFLAGS}"
 
 %build
 cat config.log
