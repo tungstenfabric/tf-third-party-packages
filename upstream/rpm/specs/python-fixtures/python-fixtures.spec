@@ -17,7 +17,7 @@ BuildArch:      noarch
 
 BuildRequires:  python2-devel
 
-Requires:       python2-testtools
+Requires:       python-testtools
 
 %description
 Fixtures defines a Python contract for reusable state / support logic,

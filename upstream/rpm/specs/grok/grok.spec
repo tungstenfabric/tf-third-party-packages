@@ -13,7 +13,6 @@ Requires: libevent
 Requires: pcre >= 7.6
 Requires: tokyocabinet >= 1.4.9
 BuildRequires: libevent-devel gperf tokyocabinet-devel pcre-devel
-BuildRequires: libtirpc-devel
 
 # no longer needed -- modern jls-grok gem uses libffi
 Obsoletes: grok-ruby

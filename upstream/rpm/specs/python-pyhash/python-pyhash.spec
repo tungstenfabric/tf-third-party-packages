@@ -12,7 +12,7 @@ License:        Apache Software License.
 URL:            https://github.com/flier/pyfasthash
 Source0:        https://pypi.python.org/packages/source/p/%{pkg}/%{pkg}-0.6.2.tar.gz
 
-BuildRequires:  python2-devel
+BuildRequires:  python-devel
 BuildRequires:  boost-devel
 BuildRequires:  python2-pip
 

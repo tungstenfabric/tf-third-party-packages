@@ -13,7 +13,7 @@ Group: Development/Libraries
 Prefix: %{_prefix}
 Vendor: Scott Griffiths <dr.scottgriffiths@gmail.com>
 Url: https://github.com/scott-griffiths/bitstring
-BuildRequires: python2-devel
+BuildRequires: python-devel
 
 %description
 ==================

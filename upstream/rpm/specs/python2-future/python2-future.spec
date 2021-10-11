@@ -31,7 +31,7 @@ Summary: Easy, clean, reliable Python 2/3 compatibility
 BuildRequires: python2-devel
 BuildRequires: python2-setuptools
 BuildRequires: numpy
-BuildRequires: python2-requests
+BuildRequires: python-requests
 BuildRequires: python2-pytest
 Provides:      future = 0:%{version}-%{release}
 %description -n python2-%{name}

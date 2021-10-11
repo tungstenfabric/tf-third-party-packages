@@ -12,8 +12,8 @@ URL:            https://github.com/testing-cabal/extras
 Source0:        https://pypi.python.org/packages/source/e/extras/extras-%{version}.tar.gz
 
 BuildArch:      noarch
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
+BuildRequires:  python-devel
+BuildRequires:  python-setuptools
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools

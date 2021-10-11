@@ -15,7 +15,7 @@ Prefix: %{_prefix}
 BuildArch: noarch
 Vendor: Brent Tubbs <brent.tubbs@gmail.com>
 Url: https://bitbucket.org/btubbs/sseclient/
-BuildRequires: python2-setuptools
+BuildRequires: python-setuptools
 
 %description
 =================

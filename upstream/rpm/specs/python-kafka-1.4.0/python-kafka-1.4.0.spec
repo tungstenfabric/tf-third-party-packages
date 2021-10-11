@@ -18,7 +18,7 @@ BuildArch: noarch
 Vendor: Dana Powers <dana.powers@gmail.com>
 Url: https://github.com/dpkp/kafka-python
 obsoletes: python-kafka-python
-BuildRequires:  python2-setuptools
+BuildRequires:  python-setuptools
 
 %description
 Kafka Python client

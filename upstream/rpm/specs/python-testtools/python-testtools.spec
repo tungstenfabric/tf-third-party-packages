@@ -18,18 +18,18 @@ Patch0:         testtools-0.9.30-py3.patch
 BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python-extras
-BuildRequires:  python2-mimeparse >= 0.1.4
-BuildRequires:  python2-setuptools
+BuildRequires:  python-mimeparse >= 0.1.4
+BuildRequires:  python-setuptools
 %if 0%{?with_python3}
 BuildRequires:  python3-devel
 BuildRequires:  python3-extras
 BuildRequires:  python3-mimeparse
 BuildRequires:  python3-setuptools
 %endif
-BuildRequires:  python2-sphinx
+BuildRequires:  python-sphinx
 
 Requires:       python-extras
-Requires:       python2-mimeparse
+Requires:       python-mimeparse
 
 %description
 testtools is a set of extensions to the Python standard library's unit testing
