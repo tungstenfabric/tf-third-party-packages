@@ -18,17 +18,21 @@ OS_DISTR      ?= $(shell cat /etc/os-release | grep '^ID=' | cut -d = -f 2 | sed
 OS_DISTR_VER  ?= $(shell cat /etc/os-release | grep '^VERSION_ID' | cut -d = -f 2 | sed  's/\"//g')
 
 RPMBUILD_FLAGS ?=
+BUILDDEP_FLAGS ?=
 ifeq ($(OS_DISTR), rhel)
 	ifeq ($(OS_DISTR_VER), 8.4)
 		RPMBUILD_FLAGS += --define "__python %__python2"
 		RPMBUILD_FLAGS += --define "__brp_mangle_shebangs %{nil}"
 		RPMBUILD_FLAGS += --define "debug_package %{nil}"
+		BUILDDEP_FLAGS += --define "__python %__python2"
 	endif
 endif
 
 CONTAINER_ENV := $(shell if cat /proc/self/cgroup | grep -q 'docker\|libpod' ; then echo 1 ; else echo 0 ; fi)
 
+
 all: $(SPEC_TARGETS)
+python-pyhash: boost-1.53.0
 
 list:
 	@echo $(sort $(SPEC_TARGETS))
@@ -58,6 +62,10 @@ ifeq ($(CONTAINER_ENV), 0)
 	PKG_NAME = $(shell rpmspec --query --queryformat='%{name}-%{version}-%{release}\n' $(SPEC_DIR)/$@/$@.spec | head -n1)
 endif
 
+boost-1.53.0: RPMBUILD_FLAGS += --without=openmpi --without=mpich
+
+python-pyhash: boost-1.53.0
+
 $(SPEC_TARGETS): prep
 	@echo "contrail-third-party-packages: prepare sources for $@"
 	spectool -g -R $(RPMBUILD_FLAGS) $(SPEC_DIR)/$@/$@.spec -C $(SPEC_DIR)/$@/
@@ -71,7 +79,12 @@ $(SPEC_TARGETS): prep
 		rm $(BUILD_BASE)/RPMS/$(PKG_NAME).src.rpm ; \
 	else \
 		echo "docker env: contrail-third-party-packages: make $@" ; \
-		yum-builddep -y $(RPMBUILD_FLAGS) specs/$@/$@.spec ; \
+		echo "DBG: $@: BUILDDEP_FLAGS=$(BUILDDEP_FLAGS) BUILD_BASE=$(BUILD_BASE)" ; \
+		yum-builddep -y $(BUILDDEP_FLAGS) \
+			--define "_topdir $(BUILD_BASE)" \
+			--define "_sourcedir $(SPEC_DIR)/$@" \
+			specs/$@/$@.spec ; \
+		echo "DBG: $@: RPMBUILD_FLAGS=$(RPMBUILD_FLAGS)" ; \
 		rpmbuild -bb $(RPMBUILD_FLAGS) \
 			--define "_buildrootdir $$(mktemp -d)" \
 			--define "_topdir $(BUILD_BASE)" \
