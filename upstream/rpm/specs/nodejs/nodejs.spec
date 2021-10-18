@@ -18,7 +18,12 @@ BuildRequires: tar
 BuildRequires: gcc
 BuildRequires: gcc-c++
 BuildRequires: make
+%if 0%{?rhel} < 8
 BuildRequires: openssl-devel <= 1:1.0.2o
+%else
+BuildRequires: compat-openssl10 <= 1:1.0.2o
+BuildRequires: compat-openssl10-debugsource <= 1:1.0.2o
+%endif
 BuildRequires: libstdc++-devel
 BuildRequires: zlib-devel
 BuildRequires: gzip

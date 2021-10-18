@@ -32,7 +32,13 @@ librdkafka is the C/C++ client library implementation of the Apache Kafka protoc
 Summary: The Apache Kafka C library
 Group:   Development/Libraries/C and C++
 Requires: zlib libstdc++ cyrus-sasl openssl-libs
-BuildRequires: openssl-devel <= 1:1.0.2o python3
+BuildRequires: python3
+%if 0%{?rhel} < 8
+BuildRequires: openssl-devel <= 1:1.0.2o
+%else
+BuildRequires: compat-openssl10 <= 1:1.0.2o
+BuildRequires: compat-openssl10-debugsource <= 1:1.0.2o
+%endif
 
 %description -n %{name}%{soname}
 librdkafka is the C/C++ client library implementation of the Apache Kafka protocol, containing both Producer and Consumer support.

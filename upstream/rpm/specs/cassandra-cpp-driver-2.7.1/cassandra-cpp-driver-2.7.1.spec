@@ -29,7 +29,12 @@ Patch0: ring_buffer_bio.hpp.el8.patch
 
 BuildRequires: cmake >= 2.6.4
 BuildRequires: libuv-devel
+%if 0%{?rhel} < 8
 BuildRequires: openssl-devel <= 1:1.0.2o
+%else
+BuildRequires: compat-openssl10 <= 1:1.0.2o
+BuildRequires: compat-openssl10-debugsource <= 1:1.0.2o
+%endif
 
 %if 0%{?rhel} >= 8
 %define CXXFLAGS -Wno-implicit-fallthrough -Wno-error=maybe-uninitialized -Wno-error=class-memaccess -Wno-error=unused-function  -Wno-error=deprecated-declarations -Wno-error=implicit-function-declaration
