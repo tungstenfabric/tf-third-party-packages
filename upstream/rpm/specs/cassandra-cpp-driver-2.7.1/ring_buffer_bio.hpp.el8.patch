@@ -1,5 +1,5 @@
---- src/ssl/ring_buffer_bio.hpp    2017-05-16 16:27:14.000000000 -0400
-+++ src/ssl/ring_buffer_bio.hpp    2021-10-12 16:58:37.371337602 -0400
+--- src/ssl/ring_buffer_bio.hpp	2021-10-18 13:47:18.020583609 -0400
++++ src/ssl/ring_buffer_bio.hpp	2021-10-18 13:42:47.469760061 -0400
 @@ -45,6 +45,7 @@
  #include "ring_buffer.hpp"
  
