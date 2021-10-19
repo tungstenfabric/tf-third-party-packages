@@ -13,7 +13,7 @@ URL:            https://github.com/flier/pyfasthash
 Source0:        https://pypi.python.org/packages/source/p/%{pkg}/%{pkg}-0.6.2.tar.gz
 
 BuildRequires:  python2-devel
-BuildRequires:  boost-devel = 1.53.0
+BuildRequires:  boost-devel == 1.53.0
 BuildRequires:  python2-pip
 
 %description

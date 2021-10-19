@@ -32,7 +32,6 @@ CONTAINER_ENV := $(shell if cat /proc/self/cgroup | grep -q 'docker\|libpod' ; t
 
 
 all: $(SPEC_TARGETS)
-python-pyhash: boost-1.53.0
 
 list:
 	@echo $(sort $(SPEC_TARGETS))
@@ -63,8 +62,6 @@ ifeq ($(CONTAINER_ENV), 0)
 endif
 
 boost-1.53.0: RPMBUILD_FLAGS += --without=openmpi --without=mpich
-
-python-pyhash: boost-1.53.0
 
 $(SPEC_TARGETS): prep
 	@echo "contrail-third-party-packages: prepare sources for $@"

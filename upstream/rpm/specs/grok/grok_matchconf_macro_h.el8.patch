@@ -1,5 +1,5 @@
---- grok_matchconf_macro.h    2021-10-14 07:17:31.919939499 -0400
-+++ grok_matchconf_macro.h    2021-10-14 07:17:50.170196357 -0400
+--- grok_matchconf_macro.h	2021-10-19 07:03:46.530446200 -0400
++++ grok_matchconf_macro.h	2021-10-19 07:04:02.293672035 -0400
 @@ -19,6 +19,6 @@
  #endif
  
