@@ -14,7 +14,9 @@ BuildRequires:  python2-setuptools
 BuildRequires:  unzip
 
 Requires:       python2-six
+%if 0%{?rhel} < 8
 Requires:       python2-eventlet >= 0.17.1
+%endif
 
 %description
 Implements a higher level API to Apache Zookeeper for Python clients.
@@ -32,3 +34,10 @@ Implements a higher level API to Apache Zookeeper for Python clients.
 %defattr(-,root,root,-)
 %doc LICENSE README.md
 %{python_sitelib}/*
+
+%if 0%{?rhel} >= 8
+%post
+set -e
+%{__python2} -m pip \
+  "eventlet >= 0.17.1"
+%endif
