@@ -38,6 +38,6 @@ Implements a higher level API to Apache Zookeeper for Python clients.
 %if 0%{?rhel} >= 8
 %post
 set -e
-%{__python2} -m pip \
-  "eventlet >= 0.17.1"
+%{__python2} -m pip install --no-compile \
+  "eventlet>=0.17.1"
 %endif
