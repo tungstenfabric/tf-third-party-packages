@@ -28,6 +28,8 @@ BuildRequires:  python3-setuptools
 %endif
 %if 0%{?rhel} < 8
 BuildRequires:  python-sphinx
+%else
+BuildRequires:  python3-sphinx
 %endif
 
 Requires:       python-extras

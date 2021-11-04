@@ -36,7 +36,6 @@ BuildRequires: numpy
 BuildRequires: python2-numpy
 %endif
 BuildRequires: python2-requests
-BuildRequires: python2-pytest
 Provides:      future = 0:%{version}-%{release}
 %description -n python2-%{name}
 Python2 %{name} is the missing compatibility layer between Python 2 and
@@ -80,13 +79,6 @@ for i in pasteurize pasteurize-2 pasteurize-%{python2_version}; do
   ln -sf %{_bindir}/python%{python2_version}-pasteurize $RPM_BUILD_ROOT%{_bindir}/$i
 done
 sed -i -e '/^#!\//, 1d' $RPM_BUILD_ROOT%{python2_sitelib}/future/backports/test/pystone.py
-popd
-
-##This packages ships PEM certificates in future/backports/test directory
-##It's for testing purpose, i guess. Ignore them.
-%check
-pushd python2
-PYTHON_DISALLOW_AMBIGUOUS_VERSION=0 PYTHONPATH=$PWD/build/lib py.test -v
 popd
 
 %files -n python2-%{name}

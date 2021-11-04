@@ -26,6 +26,8 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 Obsoletes:      liburcu-devel
 Provides:       liburcu-devel
 
+BuildRequires: perl-Test-Harness
+
 %description    devel
 The %{name}-devel package contains libraries and header files for
 developing applications that use %{name}.

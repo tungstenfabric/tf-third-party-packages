@@ -25,7 +25,7 @@ MurmurHash1/2/3, lookup3, SuperFastHash, CityHash, SpookyHash etc
 # on downloading the zip archive due to redirects
 %prep
 %setup -q -n %{pkg}-%{version}
-pip install https://files.pythonhosted.org/packages/98/9c/079cd02e1511fa0bc155af16a333aef6a33d9753e7cb2ba201f4cbd79b0c/setuptools-5.4.1.zip
+pip2 install https://files.pythonhosted.org/packages/98/9c/079cd02e1511fa0bc155af16a333aef6a33d9753e7cb2ba201f4cbd79b0c/setuptools-5.4.1.zip
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} setup.py build
