@@ -14,18 +14,15 @@ SPEC_DIR     := $(RPM_DIR)/specs
 SPEC_TARGETS := $(notdir $(wildcard $(SPEC_DIR)/*))
 UTILS_DIR    := $(RPM_DIR)/utils
 
-OS_DISTR      ?= $(shell cat /etc/os-release | grep '^ID=' | cut -d = -f 2 | sed  's/\"//g')
-OS_DISTR_VER  ?= $(shell cat /etc/os-release | grep '^VERSION_ID' | cut -d = -f 2 | sed  's/\"//g')
+OS_PLATFORM_ID ?= $(shell cat /etc/os-release | grep '^PLATFORM_ID=' | cut -d = -f 2 | sed  's/\"//g')
 
 RPMBUILD_FLAGS ?=
 BUILDDEP_FLAGS ?=
-ifeq ($(OS_DISTR), rhel)
-	ifeq ($(OS_DISTR_VER), 8.4)
-		RPMBUILD_FLAGS += --define "__python %__python2"
-		RPMBUILD_FLAGS += --define "__brp_mangle_shebangs %{nil}"
-		RPMBUILD_FLAGS += --define "debug_package %{nil}"
-		BUILDDEP_FLAGS += --define "__python %__python2"
-	endif
+ifeq ($(OS_PLATFORM_ID), platform:el8)
+	RPMBUILD_FLAGS += --define "__python %__python2"
+	RPMBUILD_FLAGS += --define "__brp_mangle_shebangs %{nil}"
+	RPMBUILD_FLAGS += --define "debug_package %{nil}"
+	BUILDDEP_FLAGS += --define "__python %__python2"
 endif
 
 CONTAINER_ENV := $(shell if cat /proc/self/cgroup | grep -q 'docker\|libpod' ; then echo 1 ; else echo 0 ; fi)
