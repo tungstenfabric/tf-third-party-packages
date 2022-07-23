@@ -40,13 +40,7 @@ prep:
 	fi; \
 	mkdir -p $(BUILD_BASE)/BUILD; \
 	mkdir -p $(BUILD_BASE)/SRPMS; \
-	mkdir -p $(BUILD_BASE)/RPMS/noarch; \
-	echo "[localrepo]" > /etc/yum.repos.d/local.repo ; \
-	echo "name=localrepo" >> /etc/yum.repos.d/local.repo ; \
-	echo "baseurl=file:///root/RPMS/noarch/" >> /etc/yum.repos.d/local.repo ; \
-	echo "enabled=1" >> /etc/yum.repos.d/local.repo ; \
-	echo "gpgcheck=0" >> /etc/yum.repos.d/local.repo ; \
-	createrepo $(BUILD_BASE)/RPMS/noarch ;
+	mkdir -p $(BUILD_BASE)/RPMS;
 
 clean_srpms:
 	@test -d $(BUILD_BASE)/SRPMS && rm $(BUILD_BASE)/SRPMS/*.src.rpm
@@ -90,5 +84,4 @@ $(SPEC_TARGETS): prep
 			--define "_topdir $(BUILD_BASE)" \
 			--define "_sourcedir $(SPEC_DIR)/$@" \
 			specs/$@/$@.spec ; \
-		createrepo $(BUILD_BASE)/RPMS/noarch ; \
 	fi
