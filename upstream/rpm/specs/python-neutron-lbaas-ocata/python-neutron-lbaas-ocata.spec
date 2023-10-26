@@ -27,7 +27,7 @@ This is a %{type} service plugin for Openstack Neutron (Networking) service.
 This package contains the Neutron %{type} Python library.
 
 %prep
-%autosetup -n %{servicename}-%{upstream_version} -S git
+%autosetup -n %{servicename}-%{upstream_version} -S patch
 
 # Let's handle dependencies ourselves
 rm -f requirements.txt
